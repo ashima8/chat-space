@@ -1,0 +1,61 @@
+.notfication
+  .notice チャットグループが作成されました。
+
+.chat
+  .chat-side
+    .chat-user
+      .chat-user__name
+        %h1 test-user
+      .chat-user__icon
+        = link_to
+        %i.fa.fa-pencil-square-o
+        = link_to
+        %i.fa.fa-cog
+    .chat-group
+      .chat-group__name
+        %p test-group
+      .chat-group__message
+        %p さようなら
+      .chat-group__name
+        %p sample-group
+      .chat-group__message
+        %p hello!
+
+  .chat-main
+    .chat-header
+      .chat-header__left
+        %h2.group test-group
+        %p.user Members: test-user
+      .chat-header__right
+        %p.edit-btn Edit
+
+    .chat-body
+      %ul.chat-contents
+        %li.chat-content
+          .chat-content__header
+            .chat-content__name
+              %p test-user
+            .chat-content__time
+              %p 2019/07/28 17:23:32
+          .chat-content__message
+            %p さようなら
+        %li.chat-content
+          .chat-content__header
+            .chat-content__name
+              %p test-user
+            .chat-content__time
+              %p 2019/07/29 22:33:43
+          .chat-content__message
+            %p hello!
+        
+
+    .chat-footer
+      .chat-footer__message
+        .chat-footer__message__text
+          %textarea{placeholder: 'type a message'}
+        .chat-footer__message__image
+          %label
+            %input{type: 'file'}
+              %i.fa.fa-picture-o
+      .chat-footer__send
+        %input{type: 'submit', value: 'Send'}
