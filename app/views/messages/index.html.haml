@@ -1,25 +1,24 @@
-.notfication
-  .notice チャットグループが作成されました。
-
 .chat
   .chat-side
     .chat-user
       .chat-user__name
-        %h1 test-user
+        %h1 
+          = current_user.name
       .chat-user__icon
-        = link_to
-        %i.fa.fa-pencil-square-o
-        = link_to
-        %i.fa.fa-cog
-    .chat-group
-      .chat-group__name
-        %p test-group
-      .chat-group__message
-        %p さようなら
-      .chat-group__name
-        %p sample-group
-      .chat-group__message
-        %p hello!
+        %li.list
+          = link_to new_group_path do
+            = fa_icon 'pencil-square-o', class: 'icon'
+        %li.list
+          = link_to edit_user_path(current_user) do
+            = fa_icon 'cog', class: 'icon'
+    .chat-groups
+      - current_user.groups.each do |group|
+        .chat-group  
+          = link_to group_messages_path(group) do
+            .chat-group__name
+              = group.name
+            .chat-group__message
+              メッセージはまだありません。
 
   .chat-main
     .chat-header
