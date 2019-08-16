@@ -2,7 +2,7 @@
   .chat-side
     .chat-user
       .chat-user__name
-        %h3
+        %h3.header_user.name
           = current_user.name
       .chat-user__icon
         %li.list
@@ -18,7 +18,7 @@
             .chat-group__name
               = group.name
             .chat-group__message
-              メッセージはまだありません。
+              = group.show_last_message
 
   .chat-main
     .chat-header
@@ -27,34 +27,16 @@
         %p.user Members: test-user
       .chat-header__right
         %p.edit-btn Edit
-
-    .chat-body
-      %ul.chat-contents
-        %li.chat-content
-          .chat-content__header
-            .chat-content__name
-              %p test-user
-            .chat-content__time
-              %p 2019/07/28 17:23:32
-          .chat-content__message
-            %p さようなら
-        %li.chat-content
-          .chat-content__header
-            .chat-content__name
-              %p test-user
-            .chat-content__time
-              %p 2019/07/29 22:33:43
-          .chat-content__message
-            %p hello!
+    
+    .chat-messages
+      = render @messages
         
-
-    .chat-footer
-      .chat-footer__message
-        .chat-footer__message__text
-          %textarea{placeholder: 'type a message'}
-        .chat-footer__message__image
-          %label
-            %input{type: 'file'}
-              %i.fa.fa-picture-o
-      .chat-footer__send
-        %input{type: 'submit', value: 'Send'}
+    .footer
+      .form
+        =form_for [@group, @message] do |f|
+          =f.text_field :content, class: 'form__message', placeholder: 'type a message'
+          .form__mask
+            = f.label :image, class: 'form__mask__image' do
+              = fa_icon 'picture-o', class: 'icon'
+              = f.file_field :image, class: 'hidden'
+          = f.submit 'Send', class: 'form__submit'
