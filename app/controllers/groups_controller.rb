@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:edit, :update]
+  #before_action :set_group, only: [:edit, :update]
 
   def index
   end
@@ -30,6 +30,7 @@ class GroupsController < ApplicationController
   end
 
   private
+
   def group_params
     params.require(:group).permit(:name, {:user_ids => [] })
   end
