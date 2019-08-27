@@ -1,5 +1,6 @@
 $(function() {
   function buildHTML(message){
+    var imagehtml =message.image == null ? "" : `<img src="${message.image}" class="lower-message__image">`
     var html = `<div class="chat-message">
                   <div class="upper-message">
                     <div class="upper-message__user-name">
@@ -13,35 +14,30 @@ $(function() {
                     <p class="lower-message_content">
                       ${ message.content }
                     </p>
+                    ${ imagehtml }
                   </div>
                 </div>`
     return html;
   }
-  function scrollBottom(){
-    var target = $('.chat-messages').last();
-    var position = target.offset().top + $('.chat-messages').scrollTop();
-    $('.chat-messages').animate({
-      scrollTop: position
-    }, 300, 'swing');
-  }
   $("#new_message").on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
-    var url = $(this).attr('action');
+    var href = window.location.href
     $.ajax({
-      url: url,
+      url: href,
       type: "POST",
       data: formData,
       dataType: 'json',
       processData: false,
-      contentType: false
+      contentType: false,
     })
     .done(function(data) {
       var html = buildHTML(data);
       $('.chat-messages').append(html);
       $('.form__message').val('');
       $('.form__submit').prop('disabled', false);
-      scrollBottom();
+      $('.chat-messages').animate({scrollTop:$('.chat-messages')[0].scrollHeight}, 'fast');
+      $('.hidden').val('');
     })
     .fail(function(){
       alert('error')
