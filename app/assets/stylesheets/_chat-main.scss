@@ -28,11 +28,13 @@
       letter-spacing: 2px;
       padding-bottom: 10px;
     }
-    .user {
+    p {
       font-size: 12px;
       color: #999999;
       line-height: 20px;
+      display: inline-block;
     }
+    
   }
   &__right {
     float: right;

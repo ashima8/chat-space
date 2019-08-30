@@ -23,10 +23,14 @@
   .chat-main
     .chat-header
       .chat-header__left
-        %h2.group test-group
-        %p.user Members: test-user
+        %h2.group 
+          = @group.name
+        %p.user Members: 
+        - @group.users.each do |user|
+          %span
+            = user.name
       .chat-header__right
-        %p.edit-btn Edit
+        = link_to 'edit', edit_group_path(@group), class: 'edit-btn'
     
     .chat-messages
       = render @messages
