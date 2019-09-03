@@ -1,7 +1,7 @@
 $(function() {
   function buildHTML(message){
     var imagehtml =message.image == null ? "" : `<img src="${message.image}" class="lower-message__image">`
-    var html = `<div class="chat-message">
+    var html = `<div class="chat-message" data-id="${message.id}">
                   <div class="upper-message">
                     <div class="upper-message__user-name">
                       ${ message.user_name }
@@ -40,8 +40,28 @@ $(function() {
       $('.hidden').val('');
     })
     .fail(function(){
-      alert('error')
+      alert('メッセージ送信ができませんでした')
       $('.form__submit').prop('disabled', false);
     })
   })
+  var reloadMessages = function() {
+    last_message_id = $('.chat-message').last().data('id');
+    $.ajax({
+      url: 'api/messages',
+      type: 'GET',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      messages.forEach(function(message) {
+        insertHTML = buildHTML(message);
+        $('.chat-messages').append(insertHTML);
+        $('.chat-messages').animate({scrollTop: $('.chat-messages')[0].scrollHeight},'fast');
+      });
+    })
+    .fail(function() {
+      alert('自動更新ができませんでした');
+    });
+  };
+  setInterval(reloadMessages, 5000);
 });
