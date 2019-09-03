@@ -40,7 +40,7 @@ $(function() {
       $('.hidden').val('');
     })
     .fail(function(){
-      alert('error')
+      alert('メッセージ送信ができませんでした')
       $('.form__submit').prop('disabled', false);
     })
   })
@@ -60,7 +60,7 @@ $(function() {
       });
     })
     .fail(function() {
-      console.log('error');
+      alert('自動更新ができませんでした');
     });
   };
   setInterval(reloadMessages, 5000);
