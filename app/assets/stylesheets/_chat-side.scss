@@ -9,6 +9,7 @@
     height: 60px;
     background-color: #253141;
     padding: 20px;
+    position: relative;
     &__name {
       float: left;
       letter-spacing: 2px;
@@ -20,9 +21,16 @@
     }
     &__icon {
       float: right;
-      color: white;
       padding: 15px 0px 0px;
-      font-size: 20px;
+      font-size: 23px;
+      list-style: none;
+      color: white;
+      li {
+        display: inline-block;
+        .fa {
+          color: white;
+        }
+      }
     }
   }
   .chat-group {
